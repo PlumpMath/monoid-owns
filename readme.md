@@ -1,4 +1,4 @@
-Monoid Owns
+Monoid owns
 ===========
 
-A more practical implementation of the monoid class
+A practical implementation of the monoid class
