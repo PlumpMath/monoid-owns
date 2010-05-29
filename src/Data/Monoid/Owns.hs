@@ -1,7 +1,18 @@
+{-# LANGUAGE FlexibleInstances, UndecidableInstances #-}
+
 module Data.Monoid.Owns where
 
 import Prelude hiding ((+))
 import qualified Prelude as Prelude
+
+
+import qualified Data.ByteString.Lazy as LB
+import qualified Data.ByteString as B
+
+import qualified Data.Map as Map
+import qualified Data.Set as Set
+import qualified Data.Sequence as Sequence
+
 
 class Monoid a where
         mempty  :: a
@@ -25,6 +36,10 @@ infixl 6 +
 
 
 -- Monoid instances.
+
+instance (Num a) => Monoid a where
+  mempty = 0
+  mappend = (Prelude.+)
 
 instance Monoid [a] where
         mempty  = []
@@ -63,21 +78,28 @@ instance (Monoid a, Monoid b, Monoid c, Monoid d, Monoid e) =>
                 (a1 `mappend` a2, b1 `mappend` b2, c1 `mappend` c2,
                  d1 `mappend` d2, e1 `mappend` e2)
 
--- lexicographical ordering
-instance Monoid Ordering where
-        mempty         = EQ
-        LT `mappend` _ = LT
-        EQ `mappend` y = y
-        GT `mappend` _ = GT
-
-
-instance Num a => Monoid (a) where
-        mempty = Sum 0
-        Sum x `mappend` Sum y = Sum (x + y)
-
 instance Monoid (Maybe a) where
   mempty = Nothing
   Nothing `mappend` m = m
-  Just m `mappend` _ = m
+  Just m `mappend` _ = Just m
 
+instance Monoid (B.ByteString) where
+  mempty = B.empty
+  mappend = B.append
+
+instance Monoid (LB.ByteString) where
+  mempty = LB.empty
+  mappend = LB.append
+
+instance (Ord a) => Monoid (Map.Map a b) where
+  mempty = Map.empty
+  mappend = Map.union
+
+instance (Ord a) => Monoid (Set.Set a) where
+  mempty = Set.empty
+  mappend = Set.union
+
+instance Monoid (Sequence.Seq a) where
+  mempty = Sequence.empty
+  mappend = (Sequence.><)
 

@@ -1,0 +1,21 @@
+
+nemesis = do
+  
+  clean
+    [ "**/*.hi"
+    , "**/*.o"
+    , "manifest"
+    , "main"
+    , "nemesis-tmp.*"
+    ]
+  
+
+  desc "prepare cabal dist"
+  task "dist" $ do
+    sh "cabal clean"
+    sh "cabal configure"
+    sh "cabal sdist"
+
+  desc "start console"
+  task "i" - do
+    sh "ghci -isrc src/Data/Monoid/Owns.hs"
