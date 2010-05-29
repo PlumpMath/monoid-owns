@@ -2,7 +2,7 @@ Name:                 monoid-owns
 Version:              2010.5.29
 Build-type:           Simple
 Synopsis:             a practical monoid implementation
-Description:          e.g. Num instance
+Description:          a practical monoid implementation
 
 License:              BSD3
 License-file:         LICENSE
