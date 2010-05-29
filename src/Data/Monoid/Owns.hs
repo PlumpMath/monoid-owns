@@ -1,5 +1,3 @@
-{-# LANGUAGE FlexibleInstances, UndecidableInstances #-}
-
 module Data.Monoid.Owns where
 
 import Prelude hiding ((+))
@@ -37,9 +35,24 @@ infixl 6 +
 
 -- Monoid instances.
 
-instance (Num a) => Monoid a where
+
+instance Monoid Int where
   mempty = 0
   mappend = (Prelude.+)
+
+instance Monoid Integer where
+  mempty = 0
+  mappend = (Prelude.+)
+
+instance Monoid Double where
+  mempty = 0
+  mappend = (Prelude.+)
+
+instance Monoid Float where
+  mempty = 0
+  mappend = (Prelude.+)
+
+
 
 instance Monoid [a] where
         mempty  = []
