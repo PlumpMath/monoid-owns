@@ -11,6 +11,8 @@ import qualified Data.Map as Map
 import qualified Data.Set as Set
 import qualified Data.Sequence as Sequence
 
+import Data.Int (Int8, Int16, Int32, Int64)
+import Data.Word (Word8, Word16, Word32, Word64)
 
 class Monoid a where
         mempty  :: a
@@ -52,6 +54,39 @@ instance Monoid Float where
   mempty = 0
   mappend = (Prelude.+)
 
+
+instance Monoid Int8 where
+  mempty = 0
+  mappend = (Prelude.+)
+
+instance Monoid Int16 where
+  mempty = 0
+  mappend = (Prelude.+)
+  
+instance Monoid Int32 where
+  mempty = 0
+  mappend = (Prelude.+)
+  
+instance Monoid Int64 where
+  mempty = 0
+  mappend = (Prelude.+)
+  
+  
+instance Monoid Word8 where
+  mempty = 0
+  mappend = (Prelude.+)
+  
+instance Monoid Word16 where
+  mempty = 0
+  mappend = (Prelude.+)
+  
+instance Monoid Word32 where
+  mempty = 0
+  mappend = (Prelude.+)
+  
+instance Monoid Word64 where
+  mempty = 0
+  mappend = (Prelude.+)
 
 
 instance Monoid [a] where
